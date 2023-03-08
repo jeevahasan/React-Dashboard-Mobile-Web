@@ -6,7 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from './pages/signin';
 import SignUp from './pages/signup';
 import ReactDOM from 'react-dom/client';
-import React from 'react'
+import React from 'react';
+import Home from './pages/home';
+import Profile from './pages/profile';
+import UserList from './pages/userlist';
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
       <Routes>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/userlist" element={<UserList />} />
       </Routes>
     </BrowserRouter>
   );

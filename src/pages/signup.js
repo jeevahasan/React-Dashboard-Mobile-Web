@@ -3,6 +3,16 @@ import Form from 'react-bootstrap/Form';
 import React, { useRef } from 'react';
 import Card from 'react-bootstrap/Card';
 import { useUserContext } from "../context/userContext";
+import {
+    createUserWithEmailAndPassword,
+    updateProfile,
+} from "firebase/auth";
+import {
+    doc,
+    setDoc
+} from "firebase/firestore";
+import {db} from '../firebase';
+import {auth} from "../firebase";
 
 function SignUp() {
     const usernameRef = useRef();
@@ -18,7 +28,17 @@ function SignUp() {
 
         console.log(email,password)
         if(email && password && username){
-            registerUser(email, username, password);
+            // registerUser(email, username, password);
+            createUserWithEmailAndPassword(auth, email, password).then((res) => {
+                console.log(res)
+                setDoc(doc(db, "Users",res.user.uid),{
+                    username: username,
+                    email: res.user.email
+                })
+                updateProfile(auth.currentUser, {
+                    displayName : username,
+                });
+            })
         }
     }
 

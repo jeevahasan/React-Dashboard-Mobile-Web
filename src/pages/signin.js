@@ -2,16 +2,28 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React, { useRef } from 'react';
 import Card from 'react-bootstrap/Card';
+import {
+    signInWithEmailAndPassword
+} from "firebase/auth";
+import {auth} from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
     const emailRef = useRef();
     const passwordRef = useRef();
+    const navigate = useNavigate();
 
     const onSubmit = (e) => {
         e.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
 
+        if(email && password){
+            signInWithEmailAndPassword(auth, email, password).then((res) => {
+                localStorage.setItem('userUID', res.user.uid);
+                navigate("/profile");   
+            })
+        }
         console.log(email,password)
         // if(email && password){
         //     signInUser(email, password);
