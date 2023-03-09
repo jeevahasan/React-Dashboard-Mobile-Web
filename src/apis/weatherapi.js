@@ -8,6 +8,7 @@ function WeatherApi(){
   const [lat, setLat] = useState();
   const [lon, setLon] = useState();
   const [errorMessage, setErrorMessage] = useState();
+  const [weatherDetails, setWeatherDetails]= useState();
  
   const [weatherDataCountry, setWeatherDataCountry] = useState();
   const [weatherDataTemp, setWeatherDataTemp] = useState();
@@ -52,6 +53,7 @@ function WeatherApi(){
     if(lat && lon){
         setErrorMessage("");
         fetchData();
+        setWeatherDetails("Weather Details")
     }
     else if(lat){
         setErrorMessage("* Please enter longitude");
@@ -59,6 +61,7 @@ function WeatherApi(){
         setWeatherDataCountry("");
         setWeatherDataTemp("");
         setWeatherDataDesc("");
+        setWeatherDetails("");
     }
     else{
         setErrorMessage("* Please enter latitude");
@@ -66,6 +69,7 @@ function WeatherApi(){
         setWeatherDataCountry("");
         setWeatherDataTemp("");
         setWeatherDataDesc("");
+        setWeatherDetails("");
     }
   };
 
@@ -84,7 +88,7 @@ function WeatherApi(){
                 <Form.Control type="number"  min="-180" max="180" step="0.01" placeholder="Enter Longitude" onChange={(event) => setLon(event.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3">
-                <Form.Label>{errorMessage}</Form.Label>
+                <Form.Label style={{ color: 'red' }} >{errorMessage}</Form.Label>
             </Form.Group>
             <Form.Group className="mb-3">
                 <Button variant="primary" type="submit">
@@ -92,7 +96,7 @@ function WeatherApi(){
                 </Button>
             </Form.Group>
             <Form.Group className="mb-3">
-                <Form.Label>WeatherDetails</Form.Label>
+                <Form.Label>{weatherDetails}</Form.Label>
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>{weatherDataName}</Form.Label>

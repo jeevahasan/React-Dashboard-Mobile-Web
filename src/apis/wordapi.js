@@ -5,10 +5,10 @@ import axios, * as others from 'axios';
 
 
 function WordApi(){
-  const [word, setWord] = useState('');
-  const [definition ,setDefinition] = useState('');
+  const [word, setWord] = useState();
+  const [definition ,setDefinition] = useState();
   const [errorMessage, setErrorMessage] = useState();
-
+  const [definitionString, setDefinitionString] = useState();
      
      
       const fetchData = async () => {
@@ -21,6 +21,7 @@ function WordApi(){
         let defArray = response.data.typeOf;
         if(defArray.length == 0){
           setDefinition("No definition found");
+          setDefinitionString("");
         }
         else{
           let defSet="";
@@ -28,6 +29,7 @@ function WordApi(){
             defSet = " "+defSet+name+","
             
           ))}  
+          setDefinitionString("Definition");
           setDefinition(defSet.substring(0,defSet.length-1));
       }
         
@@ -44,10 +46,12 @@ function WordApi(){
     event.preventDefault();
     if(word){
       setErrorMessage("");
+      setDefinitionString("Definition");
     fetchData();
     }else{
       setErrorMessage("* Enter word for definition");
       setDefinition("");
+      setDefinitionString("");
     }
   };
 
@@ -69,7 +73,7 @@ function WordApi(){
               </Button>
             </Form.Group>
             <Form.Group className="mb-3">
-                <Form.Label>Definition</Form.Label>
+                <Form.Label>{definitionString}</Form.Label>
             </Form.Group>
             <Form.Group className="mb-3">
             <Form.Label >{definition}</Form.Label>

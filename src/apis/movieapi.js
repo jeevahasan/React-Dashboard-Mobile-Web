@@ -9,7 +9,7 @@ function MovieApi(){
   const [searchstring, setSearchString] = useState();
   const [errorMessage, setErrorMessage] = useState();
   const [movieArray, setMovieArray] = useState([]);
- 
+  const [movieDetails, setMovieDetails] = useState();
 
  
 
@@ -26,10 +26,15 @@ function MovieApi(){
         const response = await axios.get(url, { headers });
        
         console.log(response.data);
-        if(response.data.Response === 'True')
+        if(response.data.Response === 'True'){
+            setMovieDetails("Movie Details");
             setMovieArray(response.data.Search);
-        else
+        }
+        else{
             setErrorMessage(response.data.Error);
+            setMovieArray([]);
+            setMovieDetails("");
+        }
       
        
       };
@@ -46,6 +51,7 @@ function MovieApi(){
     }
     else{
         setErrorMessage("* Please enter movie");
+        setMovieDetails("");
         setMovieArray([]);
     }
    
@@ -69,7 +75,7 @@ function MovieApi(){
                 </Button>
             </Form.Group>
             <Form.Group className="mb-3">
-                <Form.Label>MovieDetails</Form.Label>
+                <Form.Label>{movieDetails}</Form.Label>
             </Form.Group>
             
             <Form.Group>

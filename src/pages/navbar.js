@@ -13,7 +13,7 @@ function BasicNavBar() {
           <Nav className="me-auto">
           </Nav>
           <Nav>
-            <Nav.Link href="/movieapi">Login</Nav.Link>
+            <Nav.Link href="/weatherapi">Login</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
