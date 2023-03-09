@@ -9,6 +9,8 @@ import ReactDOM from 'react-dom/client';
 import React from 'react';
 import WordApi from './apis/wordapi';
 import WeatherApi from './apis/weatherapi';
+import Notes from './components/Notes/Notes';
+import Calculator from './components/Calculator/Calculator';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/wordapi" element={<WordApi />}/>
         <Route path="/weatherapi" element={<WeatherApi />}/>
+        <Route path="/notes" element={<Notes />}/>
+        <Route path="/calculator" element={<Calculator />}/>
       </Routes>
     </BrowserRouter>
   );
