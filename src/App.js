@@ -8,6 +8,7 @@ import SignUp from './pages/signup';
 import ReactDOM from 'react-dom/client';
 import React from 'react';
 import WordApi from './apis/wordapi';
+import WeatherApi from './apis/weatherapi';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/wordapi" element={<WordApi />}/>
+        <Route path="/weatherapi" element={<WeatherApi />}/>
       </Routes>
     </BrowserRouter>
   );
