@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import axios, * as others from 'axios';
 
@@ -64,14 +64,17 @@ function WordApi(){
                 <Form.Label style={{ color: 'red' }}>{errorMessage}</Form.Label>
             </Form.Group>
             <Form.Group className="mb-3">
+              <Button variant="primary" type="submit">
+                  Search
+              </Button>
+            </Form.Group>
+            <Form.Group className="mb-3">
                 <Form.Label>Definition</Form.Label>
             </Form.Group>
             <Form.Group className="mb-3">
             <Form.Label >{definition}</Form.Label>
             </Form.Group>
-            <Button variant="primary" type="submit">
-                Search
-            </Button>
+           
         </Form>
     </Card.Body>
    

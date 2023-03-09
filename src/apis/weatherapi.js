@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Col, Form, Row } from 'react-bootstrap';
+import { Button, Card, Form} from 'react-bootstrap';
 import axios, * as others from 'axios';
 
 
@@ -54,14 +54,14 @@ function WeatherApi(){
         fetchData();
     }
     else if(lat){
-        setErrorMessage("Please enter longitude");
+        setErrorMessage("* Please enter longitude");
         setWeatherDataName("");
         setWeatherDataCountry("");
         setWeatherDataTemp("");
         setWeatherDataDesc("");
     }
     else{
-        setErrorMessage("Please enter latitude");
+        setErrorMessage("* Please enter latitude");
         setWeatherDataName("");
         setWeatherDataCountry("");
         setWeatherDataTemp("");
@@ -79,12 +79,17 @@ function WeatherApi(){
                 <Form.Control type="number" min="-180" max="180" step="0.01" placeholder="Enter Latitude" onChange={(event) => setLat(event.target.value)} />
             </Form.Group>
                 
-            <Form.Group as={Row} className="mb-3">
+            <Form.Group className="mb-3">
                 <Form.Label>Longitude</Form.Label>
                 <Form.Control type="number"  min="-180" max="180" step="0.01" placeholder="Enter Longitude" onChange={(event) => setLon(event.target.value)} />
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>{errorMessage}</Form.Label>
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <Button variant="primary" type="submit">
+                    Search
+                </Button>
             </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>WeatherDetails</Form.Label>
@@ -103,9 +108,7 @@ function WeatherApi(){
             </Form.Group> 
                
                 
-            <Button variant="primary" type="submit">
-                Search
-            </Button>
+           
         </Form>
     </Card.Body>
    
