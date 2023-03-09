@@ -5,9 +5,10 @@ import axios, * as others from 'axios';
 
 
 function WeatherApi(){
-  const [lat, setLat] = useState(0);
-  const [lon, setLon] = useState(0);
-  const [weatherData, setWeatherData] = useState(null);
+  const [lat, setLat] = useState();
+  const [lon, setLon] = useState();
+  const [errorMessage, setErrorMessage] = useState();
+ 
   const [weatherDataCountry, setWeatherDataCountry] = useState();
   const [weatherDataTemp, setWeatherDataTemp] = useState();
   const [weatherDataDesc, setWeatherDataDesc] = useState();
@@ -25,7 +26,7 @@ function WeatherApi(){
         };
         const url = 'https://weatherbit-v1-mashape.p.rapidapi.com/current?lat='+lat+'&lon='+lon;
         const response = await axios.get(url, { headers });
-        setWeatherData(response.data);
+       
         console.log(response.data.data[0]);
 
         setWeatherDataName("Timezone: "+response.data.data[0].timezone);
@@ -35,6 +36,8 @@ function WeatherApi(){
       
        
       };
+
+    
   
      useEffect(() => {
       
@@ -46,7 +49,24 @@ function WeatherApi(){
 
   const handleSearch = (event) => {
     event.preventDefault();
-    fetchData();
+    if(lat && lon){
+        setErrorMessage("");
+        fetchData();
+    }
+    else if(lat){
+        setErrorMessage("Please enter longitude");
+        setWeatherDataName("");
+        setWeatherDataCountry("");
+        setWeatherDataTemp("");
+        setWeatherDataDesc("");
+    }
+    else{
+        setErrorMessage("Please enter latitude");
+        setWeatherDataName("");
+        setWeatherDataCountry("");
+        setWeatherDataTemp("");
+        setWeatherDataDesc("");
+    }
   };
 
   return (
@@ -63,7 +83,9 @@ function WeatherApi(){
                 <Form.Label>Longitude</Form.Label>
                 <Form.Control type="number"  min="-180" max="180" step="0.01" placeholder="Enter Longitude" onChange={(event) => setLon(event.target.value)} />
             </Form.Group>
-            
+            <Form.Group className="mb-3">
+                <Form.Label>{errorMessage}</Form.Label>
+            </Form.Group>
             <Form.Group className="mb-3">
                 <Form.Label>WeatherDetails</Form.Label>
             </Form.Group>
