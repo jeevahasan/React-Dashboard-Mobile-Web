@@ -36,10 +36,3 @@
     transform: rotate(360deg);
   }
 }
-.movieGrid{
-  padding: 3 em;
-   margin: 3 em;
-  display: grid;
-  justify-content: space-between;
-  grid-template-rows:auto auto;
-}
