@@ -9,6 +9,7 @@ function Profile(){
     const [email, setEmail] = useState(null);
     const [username, setUsername] = useState(null);
 
+    console.log(localStorage.getItem("userUID"))
     const docRef = doc(db, "Users", localStorage.getItem("userUID"));
 
     getDoc(docRef).then((res) => {

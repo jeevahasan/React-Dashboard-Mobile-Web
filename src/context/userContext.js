@@ -5,14 +5,14 @@ import {
     onAuthStateChanged,
     signOut,
     sendPasswordResetEmail,
+    signInWithEmailAndPassword
 } from "firebase/auth";
 import {
     setDoc,
     doc
 } from "firebase/firestore";
-import {auth} from "../firebase";
-import {db} from '../firebase';
-
+import {auth, db} from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 export const UserContext = createContext({});
 
@@ -47,6 +47,18 @@ export const UserContextProvider = ({ children }) => {
         .catch(err => setError(err.message)).finally(() => setLoading(false));
     };
 
+    const signInUser = (email, password) => {
+        console.log("test")
+        // const navigate = useNavigate();
+        setLoading(true);
+        signInWithEmailAndPassword(auth, email, password).then((res) => {
+            localStorage.setItem('userUID', res.user.uid);
+            console.log("test")
+            // navigate("/home");   
+        }).catch((err) => setError(err.message))
+        .finally(() => setLoading(false));
+    }
+
     const logoutUser = () => {
         console.log("test")
         signOut(auth);
@@ -62,7 +74,8 @@ export const UserContextProvider = ({ children }) => {
         error,
         registerUser,
         logoutUser,
-        forgotPassword
+        forgotPassword,
+        signInUser
     }
 
     return <UserContext.Provider value={contextValue}>
