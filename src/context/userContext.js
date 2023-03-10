@@ -54,7 +54,7 @@ export const UserContextProvider = ({ children }) => {
         setLoading(true);
         signInWithEmailAndPassword(auth, email, password).then((res) => {
             localStorage.setItem('userUID', res.user.uid);
-            window.location.assign("/profile");
+            window.location.assign("/userlist");
         }).catch((err) => setError(err.message))
         .finally(() => setLoading(false));
     }
