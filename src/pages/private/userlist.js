@@ -6,6 +6,7 @@ import {
     collection
 } from "firebase/firestore";
 import {db} from '../../firebase';
+import Table from 'react-bootstrap/Table';
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -18,17 +19,24 @@ function UserList() {
     })
 
   return (
-    <>
-      
-        <ListGroup className="my-2">
-        {users.map((user) => (
-          <>
-            <ListGroup.Item>{user.username}</ListGroup.Item>
-            <ListGroup.Item>{user.email}</ListGroup.Item>
-          </>
+    <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>User Name</th>
+          <th>Email Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        {users.map((user, index) => (
+          <tr>
+            <td>{index + 1}</td>
+            <td>{user.username}</td>
+            <td>{user.email}</td>
+          </tr>
         ))}
-        </ListGroup>
-    </>
+      </tbody>
+    </Table>
   );
 }
 

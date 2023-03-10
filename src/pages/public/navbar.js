@@ -35,8 +35,20 @@ function BasicNavBar() {
               <ListGroup.Item action href="/userlist">
                 Users list
               </ListGroup.Item>
-              <ListGroup.Item action href="#link2" disabled>
-                Link 2
+              <ListGroup.Item action href="/wordapi">
+                Word API
+              </ListGroup.Item>
+              <ListGroup.Item action href="/weatherapi">
+                Weather API
+              </ListGroup.Item>
+              <ListGroup.Item action href="/movieapi">
+                Movie API
+              </ListGroup.Item>
+              <ListGroup.Item action href="/notes">
+                Add notes
+              </ListGroup.Item>
+              <ListGroup.Item action href="/calculator">
+                Calculator
               </ListGroup.Item>
             </ListGroup>
           </Offcanvas.Body>

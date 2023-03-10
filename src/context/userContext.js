@@ -6,7 +6,12 @@ import {
     signOut,
     sendPasswordResetEmail,
 } from "firebase/auth";
+import {
+    setDoc,
+    doc
+} from "firebase/firestore";
 import {auth} from "../firebase";
+import {db} from '../firebase';
 
 
 export const UserContext = createContext({});
@@ -30,7 +35,7 @@ export const UserContextProvider = ({ children }) => {
 
     const registerUser = (email, username, password) => {
         setLoading(true);
-        createUserWithEmailAndPassword(auth, email, password).then(() => {
+        createUserWithEmailAndPassword(auth, email, password).then((res) => {
             setDoc(doc(db, "Users",res.user.uid),{
                 username: username,
                 email: res.user.email
