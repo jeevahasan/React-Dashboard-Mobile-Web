@@ -3,14 +3,13 @@ import {
     createUserWithEmailAndPassword,
     updateProfile,
     onAuthStateChanged,
-    // signInWithEmailAndPassword,
-    // signOut,
-    // sendPasswordResetEmail
+    signOut,
+    sendPasswordResetEmail,
 } from "firebase/auth";
 import {auth} from "../firebase";
 
 
-const UserContext = createContext({});
+export const UserContext = createContext({});
 
 export const useUserContext = () => useContext(UserContext);
 
@@ -32,18 +31,37 @@ export const UserContextProvider = ({ children }) => {
     const registerUser = (email, username, password) => {
         setLoading(true);
         createUserWithEmailAndPassword(auth, email, password).then(() => {
+            setDoc(doc(db, "Users",res.user.uid),{
+                username: username,
+                email: res.user.email
+            })
             updateProfile(auth.currentUser, {
                 displayName : username,
             });
         }).then((res) => console.log(res))
         .catch(err => setError(err.message)).finally(() => setLoading(false));
-    }
+    };
+
+    const logoutUser = () => {
+        console.log("test")
+        signOut(auth);
+    };
+
+    const forgotPassword = (email) => {
+        return sendPasswordResetEmail(auth, email);
+    };
 
     const contextValue = {
-        registerUser
+        user,
+        loading,
+        error,
+        registerUser,
+        logoutUser,
+        forgotPassword
     }
 
     return <UserContext.Provider value={contextValue}>
         {children}
     </UserContext.Provider>
 }
+

@@ -3,7 +3,7 @@ import {
     getDoc,
     doc
 } from "firebase/firestore";
-import {db} from '../firebase';
+import {db} from '../../firebase';
 
 function Profile(){
     const [email, setEmail] = useState(null);

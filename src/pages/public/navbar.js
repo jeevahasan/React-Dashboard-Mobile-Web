@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import React, { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { CgProfile } from 'react-icons/cg';
 
 function BasicNavBar() {
   const [show, setShow] = useState(false);
@@ -21,6 +22,7 @@ function BasicNavBar() {
           </Nav>
           <Nav>
             <Nav.Link href="/signin">Login</Nav.Link>
+            <Nav.Link href="/profile"><CgProfile/></Nav.Link>
           </Nav>
         </Navbar.Collapse>
 
@@ -31,7 +33,7 @@ function BasicNavBar() {
           <Offcanvas.Body>
             <ListGroup defaultActiveKey="/home">
               <ListGroup.Item action href="/userlist">
-                Link 1
+                Users list
               </ListGroup.Item>
               <ListGroup.Item action href="#link2" disabled>
                 Link 2

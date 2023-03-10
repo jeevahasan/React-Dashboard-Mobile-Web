@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card';
 import {
     signInWithEmailAndPassword
 } from "firebase/auth";
-import {auth} from "../firebase";
+import {auth} from "../../firebase/index";
 import { useNavigate } from "react-router-dom";
 
 function SignIn() {
@@ -21,7 +21,8 @@ function SignIn() {
         if(email && password){
             signInWithEmailAndPassword(auth, email, password).then((res) => {
                 localStorage.setItem('userUID', res.user.uid);
-                navigate("/profile");   
+                console.log("test")
+                navigate("/home");   
             })
         }
         console.log(email,password)
