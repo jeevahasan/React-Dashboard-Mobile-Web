@@ -6,6 +6,8 @@ import movieStyle from'./movieStyle.css'
 
 
 function MovieApi(){
+  //intializing strings and arrays using useState
+
   const [searchstring, setSearchString] = useState();
   const [errorMessage, setErrorMessage] = useState();
   const [movieArray, setMovieArray] = useState([]);
@@ -14,7 +16,7 @@ function MovieApi(){
  
 
      
-     
+     //function for fetching data from Movie API
       const fetchData = async () => {
        
         console.log("searchString "+searchstring);
@@ -26,6 +28,7 @@ function MovieApi(){
         const response = await axios.get(url, { headers });
        
         console.log(response.data);
+        //checking whether we are getting Response and if it is true we are assigning data to movie array to get displayed or if we are getting response as false we are displayig error message
         if(response.data.Response === 'True'){
             setMovieDetails("Movie Details");
             setMovieArray(response.data.Search);
@@ -45,6 +48,7 @@ function MovieApi(){
 
   const handleSearch = (event) => {
     event.preventDefault();
+    //checking whether search string has been inputed. if yes we will call api using fetchdata function or else we will show an error message
     if(searchstring){
         setErrorMessage("");
         fetchData();
@@ -56,7 +60,7 @@ function MovieApi(){
     }
    
   };
-
+//here we are using form and card to display UI and using map function we are listing the movies in movie array which we got by calling Movie API
   return (
     <Card style={{ width: '25rem' }}>
     <Card.Body>
@@ -77,7 +81,6 @@ function MovieApi(){
             <Form.Group className="mb-3">
                 <Form.Label>{movieDetails}</Form.Label>
             </Form.Group>
-            
             <Form.Group>
           {movieArray.map(item => (
             <Form.Group>

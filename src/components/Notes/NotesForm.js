@@ -6,13 +6,14 @@ const NotesForm = ({addNoteProp}) => {
     const inputElement = useRef();
 
     const [note, setNote] = useState('');
-
+//adding new note
     const addNote = _ => {
         addNoteProp({
             id: (new Date).getTime(),
             note
         })
         setNote('');
+        //setting the focus 
         inputElement.current.focus();
     }
 

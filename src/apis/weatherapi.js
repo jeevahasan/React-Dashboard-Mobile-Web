@@ -5,6 +5,7 @@ import axios, * as others from 'axios';
 
 
 function WeatherApi(){
+      //intializing strings using useState
   const [lat, setLat] = useState();
   const [lon, setLon] = useState();
   const [errorMessage, setErrorMessage] = useState();
@@ -17,7 +18,7 @@ function WeatherApi(){
 
 
      
-     
+   //calling API using a given latitude and longitude  
       const fetchData = async () => {
        
         console.log("latitude "+lat+" longitude"+lon);
@@ -29,10 +30,10 @@ function WeatherApi(){
         const response = await axios.get(url, { headers });
        
         console.log(response.data.data[0]);
-
+//setting values to display Timezone,City ,Temperature and Description for latitude and longitude entered
         setWeatherDataName("Timezone: "+response.data.data[0].timezone);
         setWeatherDataCountry("City: "+response.data.data[0].city_name);
-        setWeatherDataTemp("Tempertaure: "+response.data.data[0].app_temp+"Kelvin");
+        setWeatherDataTemp("Temperature: "+response.data.data[0].app_temp+"Kelvin");
         setWeatherDataDesc("Description: "+response.data.data[0].weather.description);
       
        
@@ -50,6 +51,7 @@ function WeatherApi(){
 
   const handleSearch = (event) => {
     event.preventDefault();
+    //validating whether fields are empty or not. if empty gives error message else calls FetchData to call Weather API
     if(lat && lon){
         setErrorMessage("");
         fetchData();
@@ -72,7 +74,7 @@ function WeatherApi(){
         setWeatherDetails("");
     }
   };
-
+//Displays weatherDetails received form WeatherAPi using form ,card and grid
   return (
     <Card style={{ width: '25rem' }}>
     <Card.Body>

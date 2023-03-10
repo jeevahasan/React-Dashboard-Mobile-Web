@@ -21,7 +21,7 @@ function BasicNavBar() {
           <Nav className="me-auto">
           </Nav>
           <Nav>
-            <Nav.Link href="/signin">Login</Nav.Link>
+            <Nav.Link href="/wordapi">Login</Nav.Link>
             <Nav.Link href="/profile"><CgProfile/></Nav.Link>
           </Nav>
         </Navbar.Collapse>

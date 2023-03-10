@@ -5,12 +5,13 @@ import axios, * as others from 'axios';
 
 
 function WordApi(){
+   //intializing strings using useState
   const [word, setWord] = useState();
   const [definition ,setDefinition] = useState();
   const [errorMessage, setErrorMessage] = useState();
   const [definitionString, setDefinitionString] = useState();
      
-     
+     //calling api to  get the mening or definition of a given word
       const fetchData = async () => {
         const headers = {
           'X-RapidAPI-Key': '0e4150e13amsh6211e0fb63b9ee6p19087fjsne2f9e5820b3d',
@@ -19,6 +20,7 @@ function WordApi(){
         const url = 'https://wordsapiv1.p.rapidapi.com/words/'+word+'/typeOf';
         const response = await axios.get(url, { headers });
         let defArray = response.data.typeOf;
+        //checking whether word has definition if yes we will add the array contents to a string for displaying. If no definition is found we shows the error message so
         if(defArray.length == 0){
           setDefinition("No definition found");
           setDefinitionString("");
@@ -26,11 +28,13 @@ function WordApi(){
         else{
           let defSet="";
           {defArray.map(name => ( 
-            defSet = " "+defSet+name+","
+            defSet =defSet+name+", "
             
           ))}  
+         
           setDefinitionString("Definition");
-          setDefinition(defSet.substring(0,defSet.length-1));
+          // //removing the last comma and space appended
+           setDefinition(defSet.substring(0,defSet.length-2));
       }
         
       
@@ -38,10 +42,10 @@ function WordApi(){
        
       };
   
-   //  useEffect(() => console.log(myArray), [myArray])
+
    
 
-
+//validating whether field is empty if yes we will give an error message else calls fetchdata to access word api
   const handleSearch = (event) => {
     event.preventDefault();
     if(word){
@@ -54,7 +58,7 @@ function WordApi(){
       setDefinitionString("");
     }
   };
-
+//using form and card we display the definition of the word received using word api
   return (
     <Card style={{ width: '25rem' }}>
     <Card.Body>
@@ -76,7 +80,7 @@ function WordApi(){
                 <Form.Label>{definitionString}</Form.Label>
             </Form.Group>
             <Form.Group className="mb-3">
-            <Form.Label >{definition}</Form.Label>
+            <Form.Label style={{ maxwidth: '20rem' }}  muitiline = {true}>{definition}</Form.Label>
             </Form.Group>
            
         </Form>
