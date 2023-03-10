@@ -12,6 +12,7 @@ import {
     doc
 } from "firebase/firestore";
 import {auth, db} from "../firebase";
+import Alert from 'react-bootstrap/Alert';
 
 
 export const UserContext = createContext({});
@@ -52,11 +53,7 @@ export const UserContextProvider = ({ children }) => {
 
     const signInUser = (email, password) => {
         setLoading(true);
-        signInWithEmailAndPassword(auth, email, password).then((res) => {
-            localStorage.setItem('userUID', res.user.uid);
-            window.location.assign("/userlist");
-        }).catch((err) => setError(err.message))
-        .finally(() => setLoading(false));
+        return signInWithEmailAndPassword(auth, email, password)
     }
 
     const logoutUser = () => {

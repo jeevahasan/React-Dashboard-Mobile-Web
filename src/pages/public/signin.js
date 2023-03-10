@@ -1,13 +1,15 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { UserContext } from '../../context/userContext';
+import Alert from 'react-bootstrap/Alert';
 
 function SignIn() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const { signInUser, forgotPassword } = useContext(UserContext);
+    const [show, setShow] = useState(false);
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -15,7 +17,12 @@ function SignIn() {
         const password = passwordRef.current.value;
 
         if(email && password){
-            await signInUser(email, password);
+            await signInUser(email, password).then((res) => {
+                localStorage.setItem('userUID', res.user.uid);
+                window.location.assign("/userlist");
+            }).catch((err) => {
+                setShow(true);
+            })
         }
     }
 
@@ -29,6 +36,11 @@ function SignIn() {
   return (
     <div className='container'>
         <div className='col-md-6 m-auto mt-5'>
+        {show?
+            <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+                <Alert.Heading>Entered password is wrong</Alert.Heading>
+            </Alert> : ""
+        }
         <Card>
             <Card.Body>
                 <Card.Title>SignIn</Card.Title>
