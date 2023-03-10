@@ -17,7 +17,7 @@ function SignIn() {
         const password = passwordRef.current.value;
 
         if(email && password){
-            await signInUser(email, password).then((res) => {
+            await signInUser(email, password).then((res) => { // calling sigin function in userContext
                 localStorage.setItem('userUID', res.user.uid);
                 window.location.assign("/userlist");
             }).catch((err) => {

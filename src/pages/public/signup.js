@@ -19,7 +19,7 @@ function SignUp() {
         const password = passwordRef.current.value;
 
         if(email && password && username){
-            await registerUser(email, username, password);
+            await registerUser(email, username, password); // Calling registerUser funtion in userContext
         }
     }
 

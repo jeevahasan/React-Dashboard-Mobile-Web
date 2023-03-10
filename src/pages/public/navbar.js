@@ -16,7 +16,7 @@ function BasicNavBar() {
   const { logoutUser } = useContext(UserContext);
 	const currentUser = localStorage.getItem('userUID');
 
-  const logOut = () => {
+  const logOut = () => { // calling logout function
     logoutUser();
   }
 

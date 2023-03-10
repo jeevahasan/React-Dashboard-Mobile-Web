@@ -34,9 +34,9 @@ export const UserContextProvider = ({ children }) => {
         return unsubscribe;
     }, []);
 
-    const registerUser = (email, username, password) => {
+    const registerUser = (email, username, password) => { //register function
         setLoading(true);
-        createUserWithEmailAndPassword(auth, email, password).then((res) => {
+        createUserWithEmailAndPassword(auth, email, password).then((res) => { //create user using emial and password in firebase
             setDoc(doc(db, "Users",res.user.uid),{
                 username: username,
                 email: res.user.email
@@ -52,17 +52,13 @@ export const UserContextProvider = ({ children }) => {
 
     const signInUser = (email, password) => {
         setLoading(true);
-        return signInWithEmailAndPassword(auth, email, password)
+        return signInWithEmailAndPassword(auth, email, password) // signin firebase account using email and password
     }
 
-    const logoutUser = () => {
+    const logoutUser = () => { // logout function to remove uid from localstorage
         localStorage.setItem('userUID', "");
         window.location.assign("/signin");
         signOut(auth);
-    };
-
-    const forgotPassword = (email) => {
-        return sendPasswordResetEmail(auth, email);
     };
 
     const contextValue = {
@@ -71,7 +67,6 @@ export const UserContextProvider = ({ children }) => {
         error,
         registerUser,
         logoutUser,
-        forgotPassword,
         signInUser
     }
 

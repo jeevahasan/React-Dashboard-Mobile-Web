@@ -7,12 +7,12 @@ import {db} from '../../firebase';
 import { Card } from 'react-bootstrap';
 
 function Profile(){
-    const [email, setEmail] = useState(null);
-    const [username, setUsername] = useState(null);
+    const [email, setEmail] = useState(null); // set email in UI using useState
+    const [username, setUsername] = useState(null); // set username in UI using useState
 
     const docRef = doc(db, "Users", localStorage.getItem("userUID"));
 
-    getDoc(docRef).then((res) => {
+    getDoc(docRef).then((res) => { // get loggedin user details using uid
         const user = res.data();
         setEmail(user.email);
         setUsername(user.username);

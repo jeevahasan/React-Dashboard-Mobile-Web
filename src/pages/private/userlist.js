@@ -9,7 +9,7 @@ import Table from 'react-bootstrap/Table';
 function UserList() {
   const [users, setUsers] = useState([]);
 
-  getDocs(collection(db, "Users"))
+  getDocs(collection(db, "Users")) // get all users details from the collection
     .then((querySnapshot)=>{               
         const newData = querySnapshot.docs
             .map((doc) => ({...doc.data(), id:doc.id }));
