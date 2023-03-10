@@ -3,16 +3,21 @@ import {
     createUserWithEmailAndPassword,
     updateProfile,
     onAuthStateChanged,
-    // signInWithEmailAndPassword,
-    // signOut,
-    // sendPasswordResetEmail
+    signOut,
+    sendPasswordResetEmail,
+    signInWithEmailAndPassword
 } from "firebase/auth";
-import {auth} from "../firebase";
+import {
+    setDoc,
+    doc
+} from "firebase/firestore";
+import {auth, db} from "../firebase";
 
 
-const UserContext = createContext({});
+export const UserContext = createContext({});
 
 export const useUserContext = () => useContext(UserContext);
+
 
 export const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -29,21 +34,44 @@ export const UserContextProvider = ({ children }) => {
         return unsubscribe;
     }, []);
 
-    const registerUser = (email, username, password) => {
+    const registerUser = (email, username, password) => { //register function
         setLoading(true);
-        createUserWithEmailAndPassword(auth, email, password).then(() => {
+        createUserWithEmailAndPassword(auth, email, password).then((res) => { //create user using emial and password in firebase
+            setDoc(doc(db, "Users",res.user.uid),{
+                username: username,
+                email: res.user.email
+            }).then(()=>{
+                window.location.assign("/signin");
+            })
             updateProfile(auth.currentUser, {
                 displayName : username,
             });
-        }).then((res) => console.log(res))
+        })
         .catch(err => setError(err.message)).finally(() => setLoading(false));
+    };
+
+    const signInUser = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password) // signin firebase account using email and password
     }
 
+    const logoutUser = () => { // logout function to remove uid from localstorage
+        localStorage.setItem('userUID', "");
+        window.location.assign("/signin");
+        signOut(auth);
+    };
+
     const contextValue = {
-        registerUser
+        user,
+        loading,
+        error,
+        registerUser,
+        logoutUser,
+        signInUser
     }
 
     return <UserContext.Provider value={contextValue}>
         {children}
     </UserContext.Provider>
 }
+
