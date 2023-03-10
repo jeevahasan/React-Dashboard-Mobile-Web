@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
-import axios, * as others from 'axios';
+import axios from 'axios';
 import movieStyle from'./movieStyle.css'
 
 
@@ -19,7 +19,6 @@ function MovieApi(){
      //function for fetching data from Movie API
       const fetchData = async () => {
        
-        console.log("searchString "+searchstring);
         const headers = {
           'X-RapidAPI-Key': '0e4150e13amsh6211e0fb63b9ee6p19087fjsne2f9e5820b3d',
           'X-RapidAPI-Host': 'movie-database-alternative.p.rapidapi.com'
@@ -27,7 +26,6 @@ function MovieApi(){
         const url = 'https://movie-database-alternative.p.rapidapi.com/?s='+searchstring+'&r=json&page=1';
         const response = await axios.get(url, { headers });
        
-        console.log(response.data);
         //checking whether we are getting Response and if it is true we are assigning data to movie array to get displayed or if we are getting response as false we are displayig error message
         if(response.data.Response === 'True'){
             setMovieDetails("Movie Details");
@@ -62,7 +60,9 @@ function MovieApi(){
   };
 //here we are using form and card to display UI and using map function we are listing the movies in movie array which we got by calling Movie API
   return (
-    <Card style={{ width: '25rem' }}>
+    <div className='container'>
+    <div className='col-md-6 m-auto movieApi'>
+    <Card>
     <Card.Body>
         <Card.Title>MovieAPI</Card.Title>
         <Form className="word-form" onSubmit={handleSearch}>
@@ -95,6 +95,8 @@ function MovieApi(){
     </Card.Body>
    
  </Card>
+ </div>
+ </div>
   );
 }
 

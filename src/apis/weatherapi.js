@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Form} from 'react-bootstrap';
-import axios, * as others from 'axios';
+import axios from 'axios';
 
 
 
@@ -16,12 +16,9 @@ function WeatherApi(){
   const [weatherDataDesc, setWeatherDataDesc] = useState();
   const [weatherDataName, setWeatherDataName] = useState();
 
-
-     
    //calling API using a given latitude and longitude  
       const fetchData = async () => {
        
-        console.log("latitude "+lat+" longitude"+lon);
         const headers = {
           'X-RapidAPI-Key': '0e4150e13amsh6211e0fb63b9ee6p19087fjsne2f9e5820b3d',
           'X-RapidAPI-Host': 'weatherbit-v1-mashape.p.rapidapi.com'
@@ -29,8 +26,7 @@ function WeatherApi(){
         const url = 'https://weatherbit-v1-mashape.p.rapidapi.com/current?lat='+lat+'&lon='+lon;
         const response = await axios.get(url, { headers });
        
-        console.log(response.data.data[0]);
-//setting values to display Timezone,City ,Temperature and Description for latitude and longitude entered
+    //setting values to display Timezone,City ,Temperature and Description for latitude and longitude entered
         setWeatherDataName("Timezone: "+response.data.data[0].timezone);
         setWeatherDataCountry("City: "+response.data.data[0].city_name);
         setWeatherDataTemp("Temperature: "+response.data.data[0].app_temp+"Kelvin");
@@ -38,15 +34,6 @@ function WeatherApi(){
       
        
       };
-
-    
-  
-     useEffect(() => {
-      
-        console.log("weather...."+ weatherDataName);
-        
-     });
-   
 
 
   const handleSearch = (event) => {
@@ -76,7 +63,9 @@ function WeatherApi(){
   };
 //Displays weatherDetails received form WeatherAPi using form ,card and grid
   return (
-    <Card style={{ width: '25rem' }}>
+    <div className='container'>
+    <div className='col-md-8 m-auto mt-5'>
+    <Card>
     <Card.Body>
         <Card.Title>WeatherAPI</Card.Title>
         <Form className="word-form" onSubmit={handleSearch}>
@@ -119,6 +108,8 @@ function WeatherApi(){
     </Card.Body>
    
  </Card>
+ </div>
+ </div>
   );
 }
 

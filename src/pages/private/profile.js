@@ -4,25 +4,31 @@ import {
     doc
 } from "firebase/firestore";
 import {db} from '../../firebase';
+import { Card } from 'react-bootstrap';
 
 function Profile(){
-    const [email, setEmail] = useState(null);
-    const [username, setUsername] = useState(null);
+    const [email, setEmail] = useState(null); // set email in UI using useState
+    const [username, setUsername] = useState(null); // set username in UI using useState
 
-    console.log(localStorage.getItem("userUID"))
     const docRef = doc(db, "Users", localStorage.getItem("userUID"));
 
-    getDoc(docRef).then((res) => {
-        console.log(res.data())
+    getDoc(docRef).then((res) => { // get loggedin user details using uid
         const user = res.data();
         setEmail(user.email);
         setUsername(user.username);
     })
       
     return(
-        <div>
-            <h1>Email: {email}</h1>
-            <h1>Username: {username}</h1>
+        <div className='container'>
+            <div className='col-md-6 m-auto mt-5'>
+                <Card>
+                    <Card.Body>
+                        <Card.Title>User Details</Card.Title>
+                        <Card.Subtitle>Username: {username}</Card.Subtitle>
+                        <Card.Subtitle>Email: {email}</Card.Subtitle>
+                    </Card.Body>
+                </Card>
+            </div>
         </div>
     );
 }

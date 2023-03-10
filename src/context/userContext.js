@@ -12,11 +12,12 @@ import {
     doc
 } from "firebase/firestore";
 import {auth, db} from "../firebase";
-import { useNavigate } from "react-router-dom";
+
 
 export const UserContext = createContext({});
 
 export const useUserContext = () => useContext(UserContext);
+
 
 export const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -33,39 +34,31 @@ export const UserContextProvider = ({ children }) => {
         return unsubscribe;
     }, []);
 
-    const registerUser = (email, username, password) => {
+    const registerUser = (email, username, password) => { //register function
         setLoading(true);
-        createUserWithEmailAndPassword(auth, email, password).then((res) => {
+        createUserWithEmailAndPassword(auth, email, password).then((res) => { //create user using emial and password in firebase
             setDoc(doc(db, "Users",res.user.uid),{
                 username: username,
                 email: res.user.email
+            }).then(()=>{
+                window.location.assign("/signin");
             })
             updateProfile(auth.currentUser, {
                 displayName : username,
             });
-        }).then((res) => console.log(res))
+        })
         .catch(err => setError(err.message)).finally(() => setLoading(false));
     };
 
     const signInUser = (email, password) => {
-        console.log("test")
-        // const navigate = useNavigate();
         setLoading(true);
-        signInWithEmailAndPassword(auth, email, password).then((res) => {
-            localStorage.setItem('userUID', res.user.uid);
-            console.log("test")
-            // navigate("/home");   
-        }).catch((err) => setError(err.message))
-        .finally(() => setLoading(false));
+        return signInWithEmailAndPassword(auth, email, password) // signin firebase account using email and password
     }
 
-    const logoutUser = () => {
-        console.log("test")
+    const logoutUser = () => { // logout function to remove uid from localstorage
+        localStorage.setItem('userUID', "");
+        window.location.assign("/signin");
         signOut(auth);
-    };
-
-    const forgotPassword = (email) => {
-        return sendPasswordResetEmail(auth, email);
     };
 
     const contextValue = {
@@ -74,7 +67,6 @@ export const UserContextProvider = ({ children }) => {
         error,
         registerUser,
         logoutUser,
-        forgotPassword,
         signInUser
     }
 

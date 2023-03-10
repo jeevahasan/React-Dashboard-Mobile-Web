@@ -17,12 +17,17 @@ const Notes = () => {
     }
 
     return (
-        <div className='Notes'>
-            <NotesForm addNoteProp = {addNote} />
-            {
-                notes.map(note => <NotesList key={ note.id } item={ note }  deleteNoteProp = {deleteNote}/>)
-            }
+        <div className='container'>
+            <div className='col-md-6 m-auto mt-5'>  
+                <div className='Notes'>
+                    <NotesForm addNoteProp = {addNote} />
+                    {
+                        notes.map(note => <NotesList key={ note.id } item={ note }  deleteNoteProp = {deleteNote}/>)
+                    }
+                </div>
+            </div>
         </div>
+        
     )
 }
 
