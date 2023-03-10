@@ -9,7 +9,7 @@ function SignUp() {
     const emailRef = useRef();
     const passwordRef = useRef();
 
-    const { registerUser } = useContext(UserContext);
+    const { registerUser } = useContext(UserContext); //calling function registerUser from userContext using useContext
 
 
     const onSubmit = async (e) => {

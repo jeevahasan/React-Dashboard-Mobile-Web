@@ -13,7 +13,7 @@ function BasicNavBar() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const { logoutUser } = useContext(UserContext);
+  const { logoutUser } = useContext(UserContext); //calling function logoutUser from userContext using useContext
 	const currentUser = localStorage.getItem('userUID');
 
   const logOut = () => { // calling logout function

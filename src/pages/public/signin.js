@@ -8,7 +8,7 @@ import Alert from 'react-bootstrap/Alert';
 function SignIn() {
     const emailRef = useRef();
     const passwordRef = useRef();
-    const { signInUser } = useContext(UserContext);
+    const { signInUser } = useContext(UserContext); //calling function sigInUser from userContext using useContext
     const [show, setShow] = useState(false);
 
     const onSubmit = async (e) => {
