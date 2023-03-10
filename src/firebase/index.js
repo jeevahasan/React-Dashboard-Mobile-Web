@@ -4,12 +4,12 @@ import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBYkyALn9P9AuO1ZuB7s4L2qRhrq0bgvPs",
-  authDomain: "react-dashboard-380206.firebaseapp.com",
-  projectId: "react-dashboard-380206",
-  storageBucket: "react-dashboard-380206.appspot.com",
-  messagingSenderId: "112157525777",
-  appId: "1:112157525777:web:8a716358a156c0b5502eb0"
+  apiKey: "AIzaSyAlc5ZEh_KLw4Gv8J3Grt5Z5H0VT6QcM_M",
+  authDomain: "react-3807c.firebaseapp.com",
+  projectId: "react-3807c",
+  storageBucket: "react-3807c.appspot.com",
+  messagingSenderId: "832599714750",
+  appId: "1:832599714750:web:65c8d97d1b53669c94a7ef"
 };
 
 const app = initializeApp(firebaseConfig);
