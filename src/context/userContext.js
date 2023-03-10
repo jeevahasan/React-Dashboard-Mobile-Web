@@ -12,7 +12,6 @@ import {
     doc
 } from "firebase/firestore";
 import {auth, db} from "../firebase";
-import Alert from 'react-bootstrap/Alert';
 
 
 export const UserContext = createContext({});

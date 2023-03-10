@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import NotesForm from './NotesForm';
 import NotesList from './NotesList';
-import { Card } from 'react-bootstrap';
 
 const Notes = () => {
 

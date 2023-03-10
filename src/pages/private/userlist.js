@@ -1,8 +1,6 @@
-import ListGroup from 'react-bootstrap/ListGroup';
 import React, {useState} from 'react';
 import {
     getDocs,
-    doc,
     collection
 } from "firebase/firestore";
 import {db} from '../../firebase';

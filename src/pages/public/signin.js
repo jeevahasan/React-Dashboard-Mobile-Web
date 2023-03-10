@@ -8,7 +8,7 @@ import Alert from 'react-bootstrap/Alert';
 function SignIn() {
     const emailRef = useRef();
     const passwordRef = useRef();
-    const { signInUser, forgotPassword } = useContext(UserContext);
+    const { signInUser } = useContext(UserContext);
     const [show, setShow] = useState(false);
 
     const onSubmit = async (e) => {
@@ -23,13 +23,6 @@ function SignIn() {
             }).catch((err) => {
                 setShow(true);
             })
-        }
-    }
-
-    const forgotPasswordHandler = () => {
-        const email = emailRef.current.value;
-        if(email) {
-            forgotPassword(email).then(() => (emailRef.current.value = ""))
         }
     }
 
