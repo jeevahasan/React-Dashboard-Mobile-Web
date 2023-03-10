@@ -26,9 +26,9 @@ const Calculator = () => {
     }
 
     return (
-        <div className='Calculator'>
+        <div className='Calculator container'>
             <form>
-                <input type="text" value={result}/>
+                <input type="text" value={result} className="form-control" />
             </form>
             <div className='keyPad'>
                 <button onClick={clear} id="clear">AC</button>

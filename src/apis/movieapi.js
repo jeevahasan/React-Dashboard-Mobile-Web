@@ -58,7 +58,9 @@ function MovieApi(){
   };
 
   return (
-    <Card style={{ width: '25rem' }}>
+    <div className='container'>
+    <div className='col-md-6 m-auto movieApi'>
+    <Card>
     <Card.Body>
         <Card.Title>MovieAPI</Card.Title>
         <Form className="word-form" onSubmit={handleSearch}>
@@ -92,6 +94,8 @@ function MovieApi(){
     </Card.Body>
    
  </Card>
+ </div>
+ </div>
   );
 }
 

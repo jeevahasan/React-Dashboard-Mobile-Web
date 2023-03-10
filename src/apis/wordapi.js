@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 import axios, * as others from 'axios';
-
+import './word.css';
 
 
 function WordApi(){
@@ -56,7 +56,9 @@ function WordApi(){
   };
 
   return (
-    <Card style={{ width: '25rem' }}>
+    <div className='container'>
+    <div className='col-md-6 m-auto mt-5'>
+    <Card>
     <Card.Body>
         <Card.Title>WordAPI</Card.Title>
         <Form className="word-form" onSubmit={handleSearch}>
@@ -83,6 +85,8 @@ function WordApi(){
     </Card.Body>
    
  </Card>
+ </div>
+ </div>
   );
 }
 

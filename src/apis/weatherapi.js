@@ -14,10 +14,7 @@ function WeatherApi(){
   const [weatherDataTemp, setWeatherDataTemp] = useState();
   const [weatherDataDesc, setWeatherDataDesc] = useState();
   const [weatherDataName, setWeatherDataName] = useState();
-
-
-     
-     
+  
       const fetchData = async () => {
        
         console.log("latitude "+lat+" longitude"+lon);
@@ -74,7 +71,9 @@ function WeatherApi(){
   };
 
   return (
-    <Card style={{ width: '25rem' }}>
+    <div className='container'>
+    <div className='col-md-8 m-auto mt-5'>
+    <Card>
     <Card.Body>
         <Card.Title>WeatherAPI</Card.Title>
         <Form className="word-form" onSubmit={handleSearch}>
@@ -117,6 +116,8 @@ function WeatherApi(){
     </Card.Body>
    
  </Card>
+ </div>
+ </div>
   );
 }
 
