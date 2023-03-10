@@ -47,7 +47,7 @@ export const UserContextProvider = ({ children }) => {
             updateProfile(auth.currentUser, {
                 displayName : username,
             });
-        }).then((res) => console.log(res))
+        })
         .catch(err => setError(err.message)).finally(() => setLoading(false));
     };
 
@@ -57,7 +57,6 @@ export const UserContextProvider = ({ children }) => {
     }
 
     const logoutUser = () => {
-        console.log("test")
         localStorage.setItem('userUID', "");
         window.location.assign("/signin");
         signOut(auth);

@@ -19,7 +19,6 @@ function WeatherApi(){
    //calling API using a given latitude and longitude  
       const fetchData = async () => {
        
-        console.log("latitude "+lat+" longitude"+lon);
         const headers = {
           'X-RapidAPI-Key': '0e4150e13amsh6211e0fb63b9ee6p19087fjsne2f9e5820b3d',
           'X-RapidAPI-Host': 'weatherbit-v1-mashape.p.rapidapi.com'
@@ -27,7 +26,6 @@ function WeatherApi(){
         const url = 'https://weatherbit-v1-mashape.p.rapidapi.com/current?lat='+lat+'&lon='+lon;
         const response = await axios.get(url, { headers });
        
-        console.log(response.data.data[0]);
     //setting values to display Timezone,City ,Temperature and Description for latitude and longitude entered
         setWeatherDataName("Timezone: "+response.data.data[0].timezone);
         setWeatherDataCountry("City: "+response.data.data[0].city_name);
@@ -36,15 +34,6 @@ function WeatherApi(){
       
        
       };
-
-    
-  
-     useEffect(() => {
-      
-        console.log("weather...."+ weatherDataName);
-        
-     });
-   
 
 
   const handleSearch = (event) => {

@@ -19,7 +19,6 @@ function MovieApi(){
      //function for fetching data from Movie API
       const fetchData = async () => {
        
-        console.log("searchString "+searchstring);
         const headers = {
           'X-RapidAPI-Key': '0e4150e13amsh6211e0fb63b9ee6p19087fjsne2f9e5820b3d',
           'X-RapidAPI-Host': 'movie-database-alternative.p.rapidapi.com'
@@ -27,7 +26,6 @@ function MovieApi(){
         const url = 'https://movie-database-alternative.p.rapidapi.com/?s='+searchstring+'&r=json&page=1';
         const response = await axios.get(url, { headers });
        
-        console.log(response.data);
         //checking whether we are getting Response and if it is true we are assigning data to movie array to get displayed or if we are getting response as false we are displayig error message
         if(response.data.Response === 'True'){
             setMovieDetails("Movie Details");
