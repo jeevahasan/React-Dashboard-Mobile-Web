@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
 import React from 'react';
-import Home from './pages/private/home';
 import Profile from './pages/private/profile';
 import UserList from './pages/private/userlist';
 import BasicNavBar from './pages/public/navbar';
@@ -16,14 +15,23 @@ import Notes from './components/Notes/Notes';
 import Calculator from './components/Calculator/Calculator';
 import MovieApi from './apis/movieapi';
 import PrivateRoute from './context/routes/PrivateRoute';
+import PublicRoute from './context/routes/PublicRoute';
 
 function App() {
   return (
     <BrowserRouter>
         <BasicNavBar />
         <Routes>
-          <Route path="/signin" element={<SignIn/>} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={
+            <PublicRoute>
+              <SignIn/>
+            </PublicRoute>
+          } />
+          <Route path="/signup" element={
+            <PublicRoute>
+              <SignUp />
+            </PublicRoute>
+          } />
           <Route path="/profile" element={
             <PrivateRoute>
               <Profile />
