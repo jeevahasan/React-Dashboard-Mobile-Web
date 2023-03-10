@@ -3,14 +3,18 @@ import {
     createUserWithEmailAndPassword,
     updateProfile,
     onAuthStateChanged,
-    // signInWithEmailAndPassword,
-    // signOut,
-    // sendPasswordResetEmail
+    signOut,
+    sendPasswordResetEmail,
+    signInWithEmailAndPassword
 } from "firebase/auth";
-import {auth} from "../firebase";
+import {
+    setDoc,
+    doc
+} from "firebase/firestore";
+import {auth, db} from "../firebase";
+import { useNavigate } from "react-router-dom";
 
-
-const UserContext = createContext({});
+export const UserContext = createContext({});
 
 export const useUserContext = () => useContext(UserContext);
 
@@ -31,19 +35,51 @@ export const UserContextProvider = ({ children }) => {
 
     const registerUser = (email, username, password) => {
         setLoading(true);
-        createUserWithEmailAndPassword(auth, email, password).then(() => {
+        createUserWithEmailAndPassword(auth, email, password).then((res) => {
+            setDoc(doc(db, "Users",res.user.uid),{
+                username: username,
+                email: res.user.email
+            })
             updateProfile(auth.currentUser, {
                 displayName : username,
             });
         }).then((res) => console.log(res))
         .catch(err => setError(err.message)).finally(() => setLoading(false));
+    };
+
+    const signInUser = (email, password) => {
+        console.log("test")
+        // const navigate = useNavigate();
+        setLoading(true);
+        signInWithEmailAndPassword(auth, email, password).then((res) => {
+            localStorage.setItem('userUID', res.user.uid);
+            console.log("test")
+            // navigate("/home");   
+        }).catch((err) => setError(err.message))
+        .finally(() => setLoading(false));
     }
 
+    const logoutUser = () => {
+        console.log("test")
+        signOut(auth);
+    };
+
+    const forgotPassword = (email) => {
+        return sendPasswordResetEmail(auth, email);
+    };
+
     const contextValue = {
-        registerUser
+        user,
+        loading,
+        error,
+        registerUser,
+        logoutUser,
+        forgotPassword,
+        signInUser
     }
 
     return <UserContext.Provider value={contextValue}>
         {children}
     </UserContext.Provider>
 }
+

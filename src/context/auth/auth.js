@@ -1,6 +1,6 @@
 import React, {useState}  from 'react';
-import SignIn from '../../pages/signin';
-import SignUp from '../../pages/signup';
+import SignIn from '../../pages/public/signin';
+import SignUp from '../../pages/public/signup';
 
 const Auth = () => {
     const [index, setIndex] = useState(false);

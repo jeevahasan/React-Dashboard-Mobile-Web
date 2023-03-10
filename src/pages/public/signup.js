@@ -1,24 +1,27 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import Card from 'react-bootstrap/Card';
-import { useUserContext } from "../context/userContext";
+import { UserContext } from "../../context/userContext";
 
 function SignUp() {
     const usernameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
-    const { registerUser } = useUserContext();
 
-    const onSubmit = (e) => {
+    const { registerUser } = useContext(UserContext);
+
+
+    const onSubmit = async (e) => {
         e.preventDefault();
         const username = usernameRef.current.value;
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
 
         console.log(email,password)
+        console.log(registerUser)
         if(email && password && username){
-            registerUser(email, username, password);
+            await registerUser(email, username, password);
         }
     }
 

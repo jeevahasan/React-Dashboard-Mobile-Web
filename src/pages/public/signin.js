@@ -1,21 +1,29 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import Card from 'react-bootstrap/Card';
+import { UserContext } from '../../context/userContext';
 
 function SignIn() {
     const emailRef = useRef();
     const passwordRef = useRef();
+    const { signInUser, forgotPassword } = useContext(UserContext);
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
 
-        console.log(email,password)
-        // if(email && password){
-        //     signInUser(email, password);
-        // }
+        if(email && password){
+            await signInUser(email, password);
+        }
+    }
+
+    const forgotPasswordHandler = () => {
+        const email = emailRef.current.value;
+        if(email) {
+            forgotPassword(email).then(() => (emailRef.current.value = ""))
+        }
     }
 
   return (
