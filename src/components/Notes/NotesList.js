@@ -1,10 +1,10 @@
 import React from 'react'
 
 const NotesList = ({item, deleteNoteProp}) => {
-
+//deleting particular note
     const deleteNote = _ => deleteNoteProp(item)
 
-
+//showing list of notes along with delete button for deleting it
     return (
         <div className='NotesList'>
             <div>{item.note}</div>

@@ -4,19 +4,19 @@ import './Calculator.css';
 const Calculator = () => {
 
     const [result, setResult] = useState('')
-
+//if clicked on any number or operation appending it to previous result
     const handleClick = (e) => {
         setResult(result.concat(e.target.name))
     }
-
+//if clicking AC clearing everything
     const clear = () => {
         setResult("")
     }
-
+//if clicked C deleting last clicked
     const backspace = () => {
         setResult(result.slice(0, result.length - 1));
     }
-
+//using eval function to get the result
     const calculate = () => {
         try {
             setResult(eval(result).toString());
@@ -24,7 +24,7 @@ const Calculator = () => {
             setResult("Error")
         }
     }
-
+//using button for numberations and operation to call onClick function
     return (
         <div className='Calculator container'>
             <form>
