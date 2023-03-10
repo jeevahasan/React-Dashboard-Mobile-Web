@@ -27,31 +27,36 @@ function SignIn() {
     }
 
   return (
-    <Card style={{ width: '25rem' }}>
-        <Card.Body>
-            <Card.Title>SignIn</Card.Title>
-            <Form className="signIn-form" onSubmit={onSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" ref={emailRef} />
-                    <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                    </Form.Text>
-                </Form.Group>
+    <div className='container'>
+        <div className='col-md-6 m-auto mt-5'>
+        <Card>
+            <Card.Body>
+                <Card.Title>SignIn</Card.Title>
+                <Form className="signIn-form" onSubmit={onSubmit}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" ref={emailRef} />
+                        <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                        </Form.Text>
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" ref={passwordRef} />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    SignIn
-                </Button>
-            </Form>
-        </Card.Body>
-        <Card.Footer>
-            <small className="text-muted">Don't have an account? <a href='/signup'>SignUp</a></small>
-        </Card.Footer>
-     </Card>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password" ref={passwordRef} />
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        SignIn
+                    </Button>
+                </Form>
+            </Card.Body>
+            <Card.Footer>
+                <small className="text-muted">Don't have an account? <a href='/signup'>SignUp</a></small>
+            </Card.Footer>
+        </Card>
+        </div>
+    </div>
+
     
   );
 }

@@ -1,16 +1,23 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { CgProfile } from 'react-icons/cg';
+import { MdLogout } from 'react-icons/md';
+import { UserContext } from '../../context/userContext';
 
 function BasicNavBar() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const { logoutUser } = useContext(UserContext);
+
+  const logOut = () => {
+    logoutUser();
+  }
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -23,6 +30,7 @@ function BasicNavBar() {
           <Nav>
             <Nav.Link href="/signin">Login</Nav.Link>
             <Nav.Link href="/profile"><CgProfile/></Nav.Link>
+            <Nav.Link onClick={logOut}><MdLogout/></Nav.Link>
           </Nav>
         </Navbar.Collapse>
 

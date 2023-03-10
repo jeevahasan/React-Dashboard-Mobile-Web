@@ -12,11 +12,12 @@ import {
     doc
 } from "firebase/firestore";
 import {auth, db} from "../firebase";
-import { useNavigate } from "react-router-dom";
+
 
 export const UserContext = createContext({});
 
 export const useUserContext = () => useContext(UserContext);
+
 
 export const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -39,6 +40,8 @@ export const UserContextProvider = ({ children }) => {
             setDoc(doc(db, "Users",res.user.uid),{
                 username: username,
                 email: res.user.email
+            }).then(()=>{
+                window.location.assign("/signin");
             })
             updateProfile(auth.currentUser, {
                 displayName : username,
@@ -48,19 +51,18 @@ export const UserContextProvider = ({ children }) => {
     };
 
     const signInUser = (email, password) => {
-        console.log("test")
-        // const navigate = useNavigate();
         setLoading(true);
         signInWithEmailAndPassword(auth, email, password).then((res) => {
             localStorage.setItem('userUID', res.user.uid);
-            console.log("test")
-            // navigate("/home");   
+            window.location.assign("/profile");
         }).catch((err) => setError(err.message))
         .finally(() => setLoading(false));
     }
 
     const logoutUser = () => {
         console.log("test")
+        localStorage.setItem('userUID', "");
+        window.location.assign("/signin");
         signOut(auth);
     };
 
