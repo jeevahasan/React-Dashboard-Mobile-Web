@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { UserContext } from "../../context/userContext";
 
@@ -11,12 +11,31 @@ function SignUp() {
 
     const { registerUser } = useContext(UserContext); //calling function registerUser from userContext using useContext
 
+    const [errorEmail, setErrorEmail] = useState();
+    const [errorPassword, setErrorPassword] = useState();
+    const [errorUsername, setErrorUsername] = useState();
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const username = usernameRef.current.value;
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
+        const username = usernameRef.current.value; // show error message if username address not entered
+        const email = emailRef.current.value; // show error message if email address not entered
+        const password = passwordRef.current.value; // show error message if password address not entered
+        
+        if(email){
+            setErrorEmail("");
+        }else{
+            setErrorEmail("Enter an email address");
+        }
+        if(password){
+            setErrorPassword("");
+        }else{
+            setErrorPassword("Enter password");
+        }
+        if(username){
+            setErrorUsername("");
+        }else{
+            setErrorUsername("Enter an username");
+        }
 
         if(email && password && username){
             await registerUser(email, username, password); // Calling registerUser funtion in userContext
@@ -33,18 +52,18 @@ function SignUp() {
                         <Form.Group className="mb-3" controlId="formUserName">
                             <Form.Label>User name</Form.Label>
                             <Form.Control type="text" placeholder="Enter username" ref={usernameRef}/>
+                            <Form.Label style={{ color: 'red' }}>{errorUsername}</Form.Label>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" placeholder="Enter email" ref={emailRef} />
-                            <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                            </Form.Text>
+                            <Form.Label style={{ color: 'red' }}>{errorEmail}</Form.Label>
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" ref={passwordRef}/>
+                            <Form.Label style={{ color: 'red' }}>{errorPassword}</Form.Label>
                         </Form.Group>
                         <Button variant="primary" type="submit">
                             SignUp

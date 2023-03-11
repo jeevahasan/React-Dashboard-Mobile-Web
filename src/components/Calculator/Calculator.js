@@ -4,24 +4,46 @@ import './Calculator.css';
 const Calculator = () => {
 
     const [result, setResult] = useState('')
+    const [resultDone, setResultDone] = useState(false);
 //if clicked on any number or operation appending it to previous result
     const handleClick = (e) => {
-        setResult(result.concat(e.target.name))
+        if(!resultDone){
+            
+            setResult(result.concat(e.target.name));
+        }else if(e.target.name === "+" || e.target.name === "-" || e.target.name === "*" || e.target.name === "/"){
+            setResult(result.concat(e.target.name));
+            setResultDone(false);
+        }
+        else {
+            setResult(e.target.name);
+            setResultDone(false);
+        }
+        
     }
 //if clicking AC clearing everything
     const clear = () => {
         setResult("")
+        setResultDone(false);
     }
 //if clicked C deleting last clicked
     const backspace = () => {
+        if(resultDone){
+        setResult("")
+        setResultDone(false);
+        }
+        else{
         setResult(result.slice(0, result.length - 1));
+        setResultDone(false);
+        }
     }
 //using eval function to get the result
     const calculate = () => {
         try {
             setResult(eval(result).toString());
+            setResultDone(true);
         } catch(err){
             setResult("Error")
+            setResultDone(true);
         }
     }
 //using button for numberations and operation to call onClick function
