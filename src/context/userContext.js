@@ -36,9 +36,7 @@ export const UserContextProvider = ({ children }) => {
 
     const registerUser = (email, username, password) => { //register function
         setLoading(true);
-        console.log("called register function");
         createUserWithEmailAndPassword(auth, email, password).then((res) => { //create user using emial and password in firebase
-          console.log(res);
             setDoc(doc(db, "Users",res.user.uid),{
                 username: username,
                 email: res.user.email
