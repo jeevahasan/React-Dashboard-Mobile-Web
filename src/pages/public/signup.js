@@ -17,9 +17,9 @@ function SignUp() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const username = usernameRef.current.value;
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
+        const username = usernameRef.current.value; // show error message if username address not entered
+        const email = emailRef.current.value; // show error message if email address not entered
+        const password = passwordRef.current.value; // show error message if password address not entered
         
         if(email){
             setErrorEmail("");

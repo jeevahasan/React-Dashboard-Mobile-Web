@@ -9,9 +9,9 @@ function SignIn() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const { signInUser } = useContext(UserContext); //calling function sigInUser from userContext using useContext
-    const [show, setShow] = useState(false);
-    const [errorEmail, setErrorEmail] = useState();
-    const [errorPassword, setErrorPassword] = useState();
+    const [show, setShow] = useState(false); 
+    const [errorEmail, setErrorEmail] = useState(); // show error message if email address not entered
+    const [errorPassword, setErrorPassword] = useState(); // show error message if password address not entered
 
     const onSubmit = async (e) => {
         e.preventDefault();
