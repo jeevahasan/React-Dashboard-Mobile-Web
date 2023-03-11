@@ -22,6 +22,11 @@ function App() {
     <BrowserRouter>
         <BasicNavBar />
         <Routes>
+          <Route path="/" element={
+            <PublicRoute>
+              <SignIn/>
+            </PublicRoute>
+          } />
           <Route path="/signin" element={
             <PublicRoute>
               <SignIn/>
